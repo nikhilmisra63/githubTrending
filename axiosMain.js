@@ -12,12 +12,16 @@ const githubTrending = async ur => {
       const $element = $(element);
       const $title = $element.find("h3 a").text();
       console.log($title);
-      var t = _.replace($title, /\n/g, "").trim();
+      let t = _.replace($title, /\n/g, "").trim();
       const $desc = $element.find(".py-1 p").text();
-      var d = _.replace($desc, /\n/g, "").trim();
+      let d = _.replace($desc, /\n/g, "").trim();
+      const $author = $element.find(".d-inline-block span").text();
+      let auth = $author.substr($author.indexOf("/") + 1).trim();
+
       const scrap = {
         title: t,
-        desc: d
+        desc: d,
+        language: auth
       };
       jsonData.push(scrap);
     });

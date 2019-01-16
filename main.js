@@ -26,11 +26,14 @@ githubTrending().then(body => {
     var t = $title.replace(/\n/g, "").trim();
     const $desc = $element.find(".py-1 p").text();
     var d = $desc.replace(/\n/g, "").trim();
-    // const $star = $element.find('.muted-link aria-label');
-    // console.log($star.text())
+    const $author = $element.find(".d-inline-block span").text();
+    let auth = $author.substr($author.indexOf("/") + 0).trim();
+    // console.log(auth);
     self.items[i] = {
+      id: i,
       title: t,
-      desc: d
+      desc: d,
+      language: auth
     };
   });
   console.log(self.items);
