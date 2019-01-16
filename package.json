@@ -9,6 +9,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "node-fetch": "^2.3.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhilmisra63/githubTrending.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nikhilmisra63/githubTrending/issues"
+  },
+  "homepage": "https://github.com/nikhilmisra63/githubTrending#readme"
 }
