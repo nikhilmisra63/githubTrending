@@ -26,4 +26,10 @@ const githubTrending = async ur => {
     console.log(error);
   }
 };
-githubTrending(url);
+const test = () => {
+  setTimeout(async () => {
+    await githubTrending(url);
+    console.log(" \t Data Fetched");
+  }, 1000);
+};
+test();
