@@ -15,13 +15,13 @@ const githubTrending = async ur => {
       let t = _.replace($title, /\n/g, "").trim();
       const $desc = $element.find(".py-1 p").text();
       let d = _.replace($desc, /\n/g, "").trim();
-      const $author = $element.find(".d-inline-block span").text();
-      let auth = $author.substr($author.indexOf("/") + 1).trim();
+      const $language = $element.find(".d-inline-block span").text();
+      let lang = $language.substr($language.indexOf("/") + 1).trim();
 
       const scrap = {
         title: t,
         desc: d,
-        language: auth
+        language: lang
       };
       jsonData.push(scrap);
     });
