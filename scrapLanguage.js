@@ -2,11 +2,19 @@ const cheerio = require("../node_modules/cheerio");
 const rl = require("readline-sync");
 const _ = require("lodash");
 const axios = require("axios");
-const fs = require("fs");
 const url = "https://github.com/trending";
+let languageUrl = "";
+
 const lan = [];
+let languageS = {
+  title: "",
+  desc: "",
+  language: ""
+};
+
 const result = {
-  main: []
+  main: [],
+  search: []
 };
 
 const githubTrending = async ur => {
@@ -32,20 +40,16 @@ const githubTrending = async ur => {
       const $element = $(element);
       let $l = $element.find("span").text();
       languageUrl = `https://github.com/trending/${$l}?since=daily`;
-      lan.push({
-        url: languageUrl,
-        language: $l
-      });
+      lan.push(languageUrl);
     });
   } catch (error) {
     console.log(error);
   }
 };
 const languageScraper = async ur => {
-  let $, lang;
-  result[ur.language] = [];
+  let $;
   try {
-    const body = await axios.get(ur.url);
+    const body = await axios.get(ur);
     $ = cheerio.load(body.data);
   } catch (error) {
     console.log(error);
@@ -57,21 +61,24 @@ const languageScraper = async ur => {
     const $desc = $element.find(".py-1 p").text();
     let d = _.replace($desc, /\n/g, "").trim();
     const $language = $element.find(".d-inline-block span").text();
-    lang = $language.substr($language.indexOf("/") + 1).trim();
+    let lang = $language.substr($language.indexOf("/") + 1).trim();
     languageS = {
       title: t,
       desc: d,
       language: lang
     };
-    result[ur.language].push(languageS);
+    result.search.push(languageS);
   });
 };
 
-const test = async () => {
-  await githubTrending(url);
-  // for (let i = 0; i < lan.length; i++) {
-  //   await languageScraper(lan[i]);
-  // }
-  console.log(result);
+const test = () => {
+  setTimeout(async () => {
+    await githubTrending(url);
+    for (let i = 3; i < 7; i++) {
+      await languageScraper(lan[i]);
+    }
+    console.log(lan);
+    console.log(result);
+  }, 10);
 };
 test();
