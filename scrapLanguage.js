@@ -3,6 +3,8 @@ const rl = require("readline-sync");
 const _ = require("lodash");
 const axios = require("axios");
 const url = "https://github.com/trending";
+const requestPromise = require("request-promise");
+const Promise = require("bluebird");
 let languageUrl = "";
 
 const lan = [];
