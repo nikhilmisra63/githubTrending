@@ -33,13 +33,13 @@ const githubTrending = async ur => {
       languageUrl = `https://github.com/trending/${$l}?since=daily`;
       urls.push(languageUrl);
     });
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
   }
 };
 
 const languageScraper = async ur => {
-  let $, lang, langu;
+  let $, lang, langu; //name
   await Promise.all(
     ur.map(async u => {
       const body = await axios.get(u);
